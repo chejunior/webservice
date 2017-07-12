@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.coolsoft.com/Mustang"
+	xmlns:tns="http://www.coolsoft.com/Mustang" elementFormDefault="qualified">
+
+	<element name="mustang" type="tns:Mustang" />
+	<complexType name="Mustang">
+		<sequence>
+			<element name="id" type="tns:ID" />
+			<element name="placa" type="tns:Max6Chars" />
+			<element name="modelo" type="int" maxOccurs="unbounded" />
+			<element name="tipo" type="tns:Tipo" />
+			<element name="payment" type="tns:Insurance"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="PaymentType">
+		<choice>
+			<element name="cash" type="int" />
+			<element name="insurance" type="tns:Insurance" />
+		</choice>
+	</complexType>
+	
+	<complexType name="Insurance">
+		<all>
+			<element name="provider" type="string" />
+			<element name="limit" type="int" />
+		</all>
+	</complexType>
+	
+	<simpleType name="ID">
+		<restriction base="int">
+			<pattern value="[0-9]*"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="Max6Chars">
+		<restriction base="string">
+			<maxLength value="6"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="Tipo">
+		<restriction base="string">
+			<enumeration value="Nuevo"/>
+			<enumeration value="Usado"/>
+		</restriction>
+	</simpleType>
+</schema>

@@ -6,8 +6,10 @@
  * For more details take a look at the Java Quickstart chapter in the Gradle
  * user guide available at https://docs.gradle.org/2.14/userguide/tutorial_java_projects.html
  */
+configurations {
+    jaxb
+}
 
-/*
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 
@@ -28,5 +30,36 @@ dependencies {
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
+    
+	compile 'org.apache.maven.plugins:maven-compiler-plugin:3.2'
+	compile 'org.jvnet.jaxb2.maven2:maven-jaxb2-plugin:0.9.0'
+	jaxb group: 'com.sun.xml.bind', name: 'jaxb-xjc', version: '2.2.4-1'
+	
+    
 }
-*/
+
+task jaxb () {
+    // output directory
+    def jaxbTargetDir = file( "${buildDir}/generated-sources" )
+    def jaxbTargetDirOtherWs = file( jaxbTargetDir.path + '/otherWs' )
+
+    // perform actions
+    doLast {
+        jaxbTargetDirOtherWs.mkdirs()
+
+        ant.taskdef(name: 'xjc', classname: 'com.sun.tools.xjc.XJCTask', classpath: configurations.jaxb.asPath)
+        ant.jaxbTargetDirOtherWs = jaxbTargetDirOtherWs
+
+        // My-Webservice v1.10
+        ant.xjc(
+                destdir: '${jaxbTargetDirOtherWs}',
+                package: 'mypackage.ws.generated.v110',
+                schema: 'src/main/xsd/Mustang.xsd',
+                extension:'true'
+        ){
+				binding(dir:'src/main/xsd', includes:'global.xjb')
+		}
+
+    }
+}
+compileJava.dependsOn jaxb
