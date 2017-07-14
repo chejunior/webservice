@@ -23,6 +23,8 @@ public class MarshallUnmarshall {
          marshaller.marshal(mustang, st);
          System.out.println(st.toString());
          
+         String test = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><mustang xmlns=\"http://www.coolsoft.com/Mustang\"><idxx>1</idxx><placssaa>RDG451</placaassa></mustang>";
+         
          Unmarshaller unmarshaller = context.createUnmarshaller();
          Mustang unMustang = (Mustang) unmarshaller.unmarshal(new StringReader(st.toString()));
          System.out.println(unMustang.getPlaca());

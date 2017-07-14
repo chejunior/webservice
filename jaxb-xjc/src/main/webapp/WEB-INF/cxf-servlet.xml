@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+xmlns:jaxws="http://cxf.apache.org/jaxws" 
+xsi:schemaLocation="         http://www.springframework.org/schema/beans                 http://www.springframework.org/schema/beans/spring-beans.xsd         
+http://cxf.apache.org/jaxws                                 http://cxf.apache.org/schemas/jaxws.xsd">
+    <!-- -->
+    <!-- This Spring config file is designed to represent a minimal -->
+    <!-- configuration for spring-loading a CXF servant, where the -->
+    <!-- servant listens using HTTP/S as the transport protocol. -->
+    <!-- -->
+    <!-- Note that the service endpoint is spring-loaded.  In the -->
+    <!-- scenario in which this config is designed to run, the -->
+    <!-- server application merely instantiates a Bus, and does not -->
+    <!-- publish any services programmatically -->
+    <!-- -->
+    <!-- -->
+    <!-- Spring-load an HTTPS servant -->
+    <!-- -->
+    <jaxws:server id="helloWs" address="/hello" >
+        <jaxws:serviceBean>
+            <bean class="com.mike.ws.spring.HelloWorldWs"/>
+        </jaxws:serviceBean>
+    </jaxws:server>
+    <!--  Non http endpoint -->
+</beans>
