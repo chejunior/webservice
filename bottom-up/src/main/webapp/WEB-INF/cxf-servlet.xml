@@ -12,7 +12,20 @@
 		<jaxws:serviceBean>
 			<bean class="com.mike.ws.soap.PaymentProcessorImpl" />
 		</jaxws:serviceBean>
+		<jaxws:inInterceptors>
+            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+                <constructor-arg>
+                    <map>
+	                    <entry key="action" value="UsernameToken"/>
+	                    <entry key="passwordType" value="PasswordText"/>
+						<entry key="passwordCallbackRef" value-ref="myPasswordCallback"/>
+                	</map>
+            </constructor-arg>
+          </bean>
+	    </jaxws:inInterceptors>
 	</jaxws:server>
+	
+	<bean id="myPasswordCallback" class="com.mike.ws.soap.UTPasswordCallback" />
 
 	<cxf:bus>
 		<cxf:features>
