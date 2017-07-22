@@ -1,5 +1,8 @@
 package com.mike.jaxrs;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "Person")
 public class Person {
    private long id;
    private String name;

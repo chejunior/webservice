@@ -3,6 +3,9 @@ package com.mike.jaxrs;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "Game")
 public class Game {
    
    private long id;

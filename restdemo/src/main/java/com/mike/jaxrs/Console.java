@@ -1,5 +1,8 @@
 package com.mike.jaxrs;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "Console")
 public class Console {
 
    private long id;
