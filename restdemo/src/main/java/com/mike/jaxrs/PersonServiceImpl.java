@@ -3,7 +3,11 @@ package com.mike.jaxrs;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
+
+import com.mike.jaxrs.exceptions.BusinessException;
 
 public class PersonServiceImpl implements PersonService {
 
@@ -31,7 +35,13 @@ public class PersonServiceImpl implements PersonService {
 	public Person getPerson(String id) {
 		System.out.println("GET person: ID:" + id);
 		Long personId = Long.parseLong(id);
-		return persons.get(personId);
+		Person person = persons.get(personId);
+		
+		if (person == null){
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+		}
+		
+		return person;
 	}
 
 	@Override
@@ -43,7 +53,8 @@ public class PersonServiceImpl implements PersonService {
 			persons.put(person.getId(), person);
 			return Response.ok().build();
 		} else {
-			return Response.notModified().build();
+			throw new NotFoundException();
+			//return Response.notModified().build();
 		}
 
 	}
@@ -65,7 +76,8 @@ public class PersonServiceImpl implements PersonService {
 			persons.remove(personId);
 			return Response.ok().build();
 		} else {
-			return Response.notModified().build();
+			throw new BusinessException("Person doesn't exist");
+			//return Response.notModified().build();
 		}
 
 	}

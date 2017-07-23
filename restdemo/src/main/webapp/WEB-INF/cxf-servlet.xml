@@ -15,8 +15,10 @@
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider"/>
+			<ref bean="exceptionHandler"/>
 		</jaxrs:providers>
 	</jaxrs:server>
+	<bean id="exceptionHandler" class="com.mike.jaxrs.exceptions.mapper.BusinessExceptionMapper"></bean>
 	<bean id="serviceBean" class="com.mike.jaxrs.PersonServiceImpl"></bean>
 	<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"></bean>
 </beans>
