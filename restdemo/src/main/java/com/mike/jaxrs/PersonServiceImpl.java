@@ -70,4 +70,11 @@ public class PersonServiceImpl implements PersonService {
 
 	}
 
+	@Override
+	public Game getGame(String gameId) {
+		long id = Long.parseLong(gameId);
+		Game game = games.get(id);
+		return game;
+	}
+
 }

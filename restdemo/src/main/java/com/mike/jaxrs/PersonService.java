@@ -27,5 +27,8 @@ public interface PersonService {
 	@DELETE
 	@Path("/persons/{id}")
 	public abstract Response deletePerson(@PathParam("id") String id);
+	
+	@Path("/games/{id}")
+	public abstract Game getGame(@PathParam("id") String gameId);
 
 }
