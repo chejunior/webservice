@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "checkList", namespace = "mike.com")
-public class CheckList {
+@XmlRootElement(name = "CheckList")
+public class ChecksList {
 
 	private List<Check> checks;
 
